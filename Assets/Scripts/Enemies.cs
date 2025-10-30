@@ -45,12 +45,12 @@ public class Enemies : MonoBehaviour
     {
         transform.Translate (velocityX * Time.deltaTime, 0 , velocityZ * Time.deltaTime);
 
-        if((transform.position.x < -9) || (transform.position.x > 9))
+        if((transform.position.x < -12) || (transform.position.x > 13))
         {
             velocityX = -velocityX;
         }
 
-        if ((transform.position.z < -9) || (transform.position.z > 9))
+        if ((transform.position.z < -12) || (transform.position.z > 11))
         {
             velocityZ = -velocityZ;
         }
