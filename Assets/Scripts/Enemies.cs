@@ -8,7 +8,7 @@ public class Enemies : MonoBehaviour
     public int lives;
     private bool isAlive = true;
 
-    public float velocityX, velocityY;
+    public float velocityX, velocityZ;
 
 
     private void Update()
@@ -43,11 +43,18 @@ public class Enemies : MonoBehaviour
     
     void MoveEnemy()
     {
-        transform.Translate (velocityX * Time.deltaTime, velocityY * Time.deltaTime, 0);
+        transform.Translate (velocityX * Time.deltaTime, 0 , velocityZ * Time.deltaTime);
 
         if((transform.position.x < -9) || (transform.position.x > 9))
         {
             velocityX = -velocityX;
         }
+
+        if ((transform.position.z < -9) || (transform.position.z > 9))
+        {
+            velocityZ = -velocityZ;
+        }
+
+
     }
 }
