@@ -16,7 +16,7 @@ public class Enemies : MonoBehaviour
     {
         MoveEnemy();
     }
-    public void SaveEnemy()
+    public void SaveEnemy() //guardar el enemic
     {
         SaveSystemController.SaveEnemy(this);
     }
@@ -26,7 +26,7 @@ public class Enemies : MonoBehaviour
         return lives;
     }
 
-    public void LoadEnemy()
+    public void LoadEnemy() //carregar el enemic
     {
         EnemyData data = SaveSystemController.LoadEnemy();
             
@@ -42,7 +42,7 @@ public class Enemies : MonoBehaviour
     }
 
 
-    public void SetPosition(Vector3 pos)
+    public void SetPosition(Vector3 pos) //Setejar la posicio del enemic
     {
         gameObject.transform.position = pos;
     }

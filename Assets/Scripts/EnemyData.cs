@@ -12,7 +12,6 @@ public class EnemyData
     public EnemyData(Enemies enemies)
     {
         health = enemies.GetHealth();
-
         enemyPosition = new float[] { enemies.transform.position.x, enemies.transform.position.y, enemies.transform.position.z };
     }
 
