@@ -8,8 +8,9 @@ public class Enemies : MonoBehaviour
     public int lives;
     private bool isAlive = true;
 
-    public float velocityX, velocityZ;
+    public float velocityX, velocityZ; //recordar que en unity els eixos son diferents (x, y) NO, (x, z) SI
 
+    private int enemiesDied; //Contabilitar quans enemics s'han matat
 
     private void Update()
     {
@@ -21,7 +22,7 @@ public class Enemies : MonoBehaviour
         lives = lifesRemaining;
     }
 
-    public int GetHealth()
+    public int GetHealth() //retornem la vida
     {
         return lives;
     }
@@ -31,17 +32,21 @@ public class Enemies : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            lives--;
-            isAlive = false;
-            Destroy(gameObject);
+            lives--; //li restem una vida
 
-            Debug.Log("Vidas restantes:" + lives + "ENEMIGO DESTRUIDO");
+            isAlive = false; //no esta viu
+
+            enemiesDied++; // sumem a 1 els enemics morts
+
+            Destroy(gameObject); //destrueix el gameObject
+
+            Debug.Log("Vidas restantes:" + lives + "\n ENEMIGO DESTRUIDO");
 
         }
         
     }
     
-    void MoveEnemy()
+    void MoveEnemy() //mètode per moure els enemics de manera random
     {
         transform.Translate (velocityX * Time.deltaTime, 0 , velocityZ * Time.deltaTime);
 
