@@ -16,10 +16,9 @@ public class Enemies : MonoBehaviour
     {
         MoveEnemy();
     }
-
-    void SetHealth(int lifesRemaining)
+    public void SaveEnemy()
     {
-        lives = lifesRemaining;
+        SaveSystemController.SaveEnemy(this);
     }
 
     public int GetHealth() //retornem la vida
@@ -27,7 +26,28 @@ public class Enemies : MonoBehaviour
         return lives;
     }
 
-    
+    public void LoadEnemy()
+    {
+        EnemyData data = SaveSystemController.LoadEnemy();
+            
+
+        lives = data.health;
+        Vector3 pos;
+
+        pos.x = data.enemyPosition[0];
+        pos.y = data.enemyPosition[1];
+        pos.z = data.enemyPosition[2];
+
+        SetPosition(pos);
+    }
+
+
+    public void SetPosition(Vector3 pos)
+    {
+        gameObject.transform.position = pos;
+    }
+
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))

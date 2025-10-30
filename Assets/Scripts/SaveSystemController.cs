@@ -55,4 +55,43 @@ public class SaveSystemController : MonoBehaviour
             return null;
         }
     }
+
+
+    public static void SaveEnemy(Enemies enemies)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = (Application.persistentDataPath + "/Saves");
+        string binaryPath = (Application.persistentDataPath + "/Saves/SaveDataEnemy.dat");
+
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        else Debug.Log("La carpeta de los enemigos ya existe!");
+
+        FileStream stream = new FileStream(binaryPath, FileMode.Create);
+        EnemyData data = new EnemyData(enemies);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static EnemyData LoadEnemy()
+    {
+        string binaryPath = (Application.persistentDataPath + "/Saves/SaveDataEnemy.dat");
+
+        if (File.Exists(binaryPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(binaryPath, FileMode.Open);
+            EnemyData data = formatter.Deserialize(stream) as EnemyData;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Save file not found at " + binaryPath);
+            return null;
+        }
+    }
 }
