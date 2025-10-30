@@ -55,4 +55,43 @@ public class SaveSystemController : MonoBehaviour
             return null;
         }
     }
+
+    public static void SaveSaveableObjects(SaveableObject SaveObject)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = (Application.persistentDataPath + "/Saves");
+        string binaryPath = (Application.persistentDataPath + "/Saves/SaveObjectData.dat");
+
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        else Debug.Log("La carpeta ya existe!");
+
+        FileStream stream = new FileStream(binaryPath, FileMode.Create);
+        ObjectData data = new ObjectData(SaveObject);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static ObjectData LoadObject()
+    {
+        string binaryPath = (Application.persistentDataPath + "/Saves/SaveObjectData.dat");
+
+        if (File.Exists(binaryPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(binaryPath, FileMode.Open);
+            ObjectData data = formatter.Deserialize(stream) as ObjectData;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Save file not found at " + binaryPath);
+            return null;
+        }
+    }
+
 }
