@@ -429,6 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2284ebca34d1e245aefc647796a100e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 80eb02c4-72de-4049-b327-2b1ddf59824f
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2284ebca34d1e245aefc647796a100e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 176b5c78-df30-4345-af85-fbc641d7e90f
 --- !u!1 &1150398278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,21 +1199,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2053282807}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: SavePlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 434937323}
-        m_TargetAssemblyTypeName: SaveableObject, Assembly-CSharp
-        m_MethodName: SaveObjects
+      - m_Target: {fileID: 2090812024}
+        m_TargetAssemblyTypeName: SaveSystemController, Assembly-CSharp
+        m_MethodName: SaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1508,6 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2284ebca34d1e245aefc647796a100e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 2b0e8c45-65f4-45ce-ba46-703b3efb34b0
 --- !u!1 &1794010460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,21 +1582,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2053282807}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: LoadPlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 434937323}
-        m_TargetAssemblyTypeName: SaveableObject, Assembly-CSharp
-        m_MethodName: LoadObjects
+      - m_Target: {fileID: 2090812024}
+        m_TargetAssemblyTypeName: SaveSystemController, Assembly-CSharp
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
