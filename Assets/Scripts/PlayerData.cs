@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//guardamos los datos de player para luego poder pasarlos a binario
 [System.Serializable]
 public class PlayerData
 {

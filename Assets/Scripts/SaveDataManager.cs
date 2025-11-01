@@ -4,20 +4,11 @@ using UnityEngine;
 
 public class SaveDataManager : MonoBehaviour
 {
+    //creamos un la lista para guardar todos los savedata, que almacena como objetos al resto de datas
     int id;
 
     private Dictionary<string, List<GameObject>> saveDictionary = new Dictionary<string, List<GameObject>>();
 
     [SerializeField] List<SaveableObject> saveableList;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

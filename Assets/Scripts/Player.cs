@@ -8,46 +8,19 @@ public class Player : MonoBehaviour, ISaveable
     PlayerData data;
     public string GetUniqueID() => "PLAYER";
 
+    //guardamos los datos de Player 
     public object CaptureData()
     {
        return data = new PlayerData(this);
     }
 
-    
+    //cargamos los datos que previamente hemos guardado de player data
     public void RestoreData(object data)
     {
         PlayerData d = (PlayerData)data;
         health = d.health;
         transform.position = new Vector3(d.pos[0], d.pos[1], d.pos[2]);
     }
-
-
-
-
-
-
-
-    
-    
-    
-    /*public void SavePlayer()
-    {
-        SaveSystemController.SavePlayer(this);
-    }
-
-    public void LoadPlayer()
-    {
-        PlayerData data = SaveSystemController.LoadPlayer();
-
-        health = data.health;
-        Vector3 pos;
-
-        pos.x = data.pos[0];
-        pos.y = data.pos[1];
-        pos.z = data.pos[2];
-
-        SetTransform(pos);
-    }*/
 
     public int GetHealth()
     {

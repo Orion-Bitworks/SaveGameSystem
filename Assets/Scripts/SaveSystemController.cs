@@ -26,16 +26,17 @@ public class SaveSystemController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // === GUARDAR TODO ===
+    // Metdo de guardado
     public static void SaveGame()
     {
         if (!Directory.Exists(saveFolder))
             Directory.CreateDirectory(saveFolder);
-
+        //guardamos los datos que hay en la clase SaveData
         SaveData saveData = new SaveData();
+        //hacemos una lista de los ISaveable que tenemos 
         ISaveable[] saveables = FindObjectsOfType<MonoBehaviour>(true) as ISaveable[];
 
-        // Captura de datos de todos los ISaveable
+        // verificamos si los MonoBEhaviours son isaveables y en ese caso guardamos la informacion
         foreach (MonoBehaviour mono in FindObjectsOfType<MonoBehaviour>(true))
         {
             if (mono is ISaveable saveable)
@@ -45,7 +46,7 @@ public class SaveSystemController : MonoBehaviour
                 saveData.allData[id] = data;
             }
         }
-
+        //lo pasamos a binario
         BinaryFormatter formatter = new BinaryFormatter();
         using (FileStream stream = new FileStream(saveFile, FileMode.Create))
         {
@@ -71,7 +72,7 @@ public class SaveSystemController : MonoBehaviour
         {
             saveData = formatter.Deserialize(stream) as SaveData;
         }
-
+        //
         foreach (MonoBehaviour mono in FindObjectsOfType<MonoBehaviour>(true))
         {
             if (mono is ISaveable saveable)
@@ -86,99 +87,5 @@ public class SaveSystemController : MonoBehaviour
 
         Debug.Log("✅ Juego cargado correctamente");
     }
-
-
-
-
-
-
-
-
-    /*public static SaveSystemController instance;
-    private void Awake()
-    {
-        if(instance != null & instance != this )
-        {
-            Destroy(gameObject);
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    public static void SavePlayer(Player player)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = (Application.persistentDataPath + "/Saves");
-        string binaryPath = (Application.persistentDataPath + "/Saves/SaveData.dat");
-
-        if (!Directory.Exists(path))
-        {
-            Directory.CreateDirectory(path);
-        }
-        else Debug.Log("La carpeta ya existe!");
-
-        FileStream stream = new FileStream(binaryPath, FileMode.Create);
-        PlayerData data = new PlayerData(player);
-
-        formatter.Serialize(stream, data);
-        stream.Close();
-    }
-
-    public static PlayerData LoadPlayer()
-    {
-        string binaryPath = (Application.persistentDataPath + "/Saves/SaveData.dat");
-
-        if (File.Exists(binaryPath))
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(binaryPath, FileMode.Open);
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
-            stream.Close();
-            return data;
-        }
-        else
-        {
-            Debug.LogError("Save file not found at " + binaryPath);
-            return null;
-        }
-    }
-
-    public static void SaveSaveableObjects(SceneObject SaveObject)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = (Application.persistentDataPath + "/Saves");
-        string binaryPath = (Application.persistentDataPath + "/Saves/SaveObjectData.dat");
-
-        if (!Directory.Exists(path))
-        {
-            Directory.CreateDirectory(path);
-        }
-        else Debug.Log("La carpeta ya existe!");
-
-        FileStream stream = new FileStream(binaryPath, FileMode.Create);
-        ObjectData data = new ObjectData(SaveObject);
-
-        formatter.Serialize(stream, data);
-        stream.Close();
-    }
-
-    public static ObjectData LoadObject()
-    {
-        string binaryPath = (Application.persistentDataPath + "/Saves/SaveObjectData.dat");
-
-        if (File.Exists(binaryPath))
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(binaryPath, FileMode.Open);
-            ObjectData data = formatter.Deserialize(stream) as ObjectData;
-            stream.Close();
-            return data;
-        }
-        else
-        {
-            Debug.LogError("Save file not found at " + binaryPath);
-            return null;
-        }
-    }*/
 
 }
