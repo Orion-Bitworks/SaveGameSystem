@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: b0bedab83cf4ed646b050aad9d1b3c8b
+=======
+guid: 163a532276c0ac24795e3cf15bc9a417
+>>>>>>> SceneObjects
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 15600000
