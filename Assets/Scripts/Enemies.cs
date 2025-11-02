@@ -7,7 +7,6 @@ public class Enemies : SaveableObject
 {
     public int health;
     public bool isAlive = true;
-
     public float velocityX, velocityZ; //recordar que en unity els eixos son diferents (x, y) NO, (x, z) SI
 
     private void Update()
