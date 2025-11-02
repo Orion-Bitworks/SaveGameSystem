@@ -39,6 +39,9 @@ public class Enemies : MonoBehaviour
         pos.z = data.enemyPosition[2];
 
         SetPosition(pos);
+
+        velocityX = data.velocityX;
+        velocityZ = data.velocityZ;
     }
 
 
