@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, ISaveable
+public class Player : SaveableObject
 {
     [SerializeField] int health = 3;
     PlayerData data;
-    public string GetUniqueID() => "PLAYER";
+    public override string GetUniqueID() => GetId();
 
     //guardamos los datos de Player 
-    public object CaptureData()
+    public override object CaptureData()
     {
        return data = new PlayerData(this);
     }
 
     //cargamos los datos que previamente hemos guardado de player data
-    public void RestoreData(object data)
+    public override void RestoreData(object data)
     {
         PlayerData d = (PlayerData)data;
         health = d.GetHealth();

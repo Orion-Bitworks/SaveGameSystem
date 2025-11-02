@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class SaveData
+public abstract class SaveData
 {
     private bool isEnabled;
     private float[] pos;

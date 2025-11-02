@@ -2,18 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveableObject : MonoBehaviour
+public abstract class SaveableObject : MonoBehaviour, ISaveable
 {
-    //hay que hacer herencia con los SaveableObjects, para que todos hereden de este y centralizarlo mas
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private string id = System.Guid.NewGuid().ToString();
+
+    public virtual string GetUniqueID() => id;
+
+    //guardamos los datos de Player 
+    public abstract object CaptureData();
+
+    //cargamos los datos que previamente hemos guardado de player data
+    public abstract void RestoreData(object obj);
+
+    public void SetId(string id)
     {
-        
+        this.id = id;
     }
 
-    // Update is called once per frame
-    void Update()
+    public string GetId()
     {
-        
+        return id;
     }
 }
