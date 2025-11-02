@@ -2,27 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveable
 {
     [SerializeField] int health = 3;
+    PlayerData data;
+    public string GetUniqueID() => "PLAYER";
 
-    public void SavePlayer()
+    //guardamos los datos de Player 
+    public object CaptureData()
     {
-        SaveSystemController.SavePlayer(this);
+       return data = new PlayerData(this);
     }
 
-    public void LoadPlayer()
+    //cargamos los datos que previamente hemos guardado de player data
+    public void RestoreData(object data)
     {
-        PlayerData data = SaveSystemController.LoadPlayer();
-
-        health = data.health;
-        Vector3 pos;
-
-        pos.x = data.pos[0];
-        pos.y = data.pos[1];
-        pos.z = data.pos[2];
-
-        SetTransform(pos);
+        PlayerData d = (PlayerData)data;
+        health = d.health;
+        transform.position = new Vector3(d.pos[0], d.pos[1], d.pos[2]);
     }
 
     public int GetHealth()
