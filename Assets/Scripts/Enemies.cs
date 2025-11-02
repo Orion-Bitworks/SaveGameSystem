@@ -11,7 +11,7 @@ public class Enemies : MonoBehaviour, ISaveable
 
     public float velocityX, velocityZ; //recordar que en unity els eixos son diferents (x, y) NO, (x, z) SI
 
-    private int enemiesDied; //Contabilitar quans enemics s'han matat
+    //private int enemiesDied; //Contabilitar quans enemics s'han matat
 
     [SerializeField] private string id = System.Guid.NewGuid().ToString();
 
@@ -86,7 +86,9 @@ public class Enemies : MonoBehaviour, ISaveable
 
             isAlive = false; //no esta viu
 
-            enemiesDied++; // sumem a 1 els enemics morts
+            //enemiesDied++; // sumem a 1 els enemics morts
+
+            GameManager.instance.AddKilledEnemy();
 
             gameObject.SetActive(isAlive); //destrueix el gameObject
 

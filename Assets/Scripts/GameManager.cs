@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour, ISaveable
     GameManagerData data;
 
     [SerializeField] int obtainedCoins;
+    [SerializeField] int killedEnemies;
 
     public string GetUniqueID() => id;
 
@@ -19,8 +20,9 @@ public class GameManager : MonoBehaviour, ISaveable
 
     public void RestoreData(object data)
     {
-        GameManagerData dt = (GameManagerData) data;
-        obtainedCoins = dt.obtainedCoins;
+        GameManagerData d = (GameManagerData) data;
+        obtainedCoins = d.GetObtainedCoins();
+        killedEnemies = d.GetKilledEnemies();
     }
 
     private void Awake()
@@ -55,5 +57,15 @@ public class GameManager : MonoBehaviour, ISaveable
     public void LoseObtainedCoins()
     {
         obtainedCoins--;
+    }
+
+    public void AddKilledEnemy()
+    {
+        killedEnemies++;
+    }
+
+    public void LoseKilledEnemy()
+    {
+        killedEnemies--;
     }
 }

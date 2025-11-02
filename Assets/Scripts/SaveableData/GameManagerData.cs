@@ -4,12 +4,33 @@ using UnityEngine;
 
 [System.Serializable]
 
-public class GameManagerData
+public class GameManagerData : SaveData
 {
-    public int obtainedCoins;
+    private int obtainedCoins;
+    private int killedEnemies;
 
     public GameManagerData(GameManager gm)
     {
-        obtainedCoins = gm.GetObtainedCoins();
+        SetObtainedCoins(gm.GetObtainedCoins());
+    }
+
+    public void SetObtainedCoins(int obtainedCoins)
+    {
+        this.obtainedCoins = obtainedCoins;
+    }
+
+    public int GetObtainedCoins()
+    {
+        return obtainedCoins;
+    }
+
+    public void SetKilledEnemies(int killedEnemies)
+    {
+        this.killedEnemies = killedEnemies;
+    }
+
+    public int GetKilledEnemies()
+    {
+        return killedEnemies;
     }
 }
