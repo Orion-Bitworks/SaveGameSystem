@@ -2,11 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, ISaveable
 {
     public static GameManager instance;
+    private string id = "GameManager";
+    GameManagerData data;
 
     [SerializeField] int obtainedCoins;
+
+    public string GetUniqueID() => id;
+
+    public object CaptureData()
+    {
+        return data = new GameManagerData(this);
+    }
+
+    public void RestoreData(object data)
+    {
+        GameManagerData dt = (GameManagerData) data;
+        obtainedCoins = dt.obtainedCoins;
+    }
 
     private void Awake()
     {

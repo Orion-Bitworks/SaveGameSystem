@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManagerData : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+[System.Serializable]
 
-    // Update is called once per frame
-    void Update()
+public class GameManagerData
+{
+    public int obtainedCoins;
+
+    public GameManagerData(GameManager gm)
     {
-        
+        obtainedCoins = gm.GetObtainedCoins();
     }
 }
