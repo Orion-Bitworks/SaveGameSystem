@@ -9,6 +9,7 @@ public class EnemyData
     public float[] enemyPosition;
     public float velocityX;
     public float velocityZ;
+    public bool isAlive;
 
     public EnemyData(Enemies enemies) //setejem cada variable amb lo que es
     {
@@ -17,6 +18,8 @@ public class EnemyData
 
         velocityX = enemies.velocityX;
         velocityZ = enemies.velocityZ;
+
+        isAlive = enemies.isAlive;
     }
 
 }
