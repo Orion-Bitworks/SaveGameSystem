@@ -10,7 +10,7 @@ public class EnemyData
     public float velocityX;
     public float velocityZ;
 
-    public EnemyData(Enemies enemies)
+    public EnemyData(Enemies enemies) //setejem cada variable amb lo que es
     {
         health = enemies.GetHealth();
         enemyPosition = new float[] { enemies.transform.position.x, enemies.transform.position.y, enemies.transform.position.z };
