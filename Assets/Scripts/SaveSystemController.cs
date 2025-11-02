@@ -51,6 +51,7 @@ public class SaveSystemController : MonoBehaviour
             formatter.Serialize(stream, tempData);
         }
 
+        AutoSaveController.instance.RestoreAutoSaveTimer();
         Debug.Log($"✅ Juego guardado en: {saveFile}");
     }
 

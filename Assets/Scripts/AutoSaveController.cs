@@ -6,12 +6,11 @@ using UnityEngine;
 public class AutoSaveController : MonoBehaviour
 {
     //lo hacemos singleton para que el autoguardado este siempre presente en escena
-    private static AutoSaveController instance;
+    public static AutoSaveController instance;
     
     //En este caso lo guardamos cada 5 segundos 
     public float timeToSave = 10f; //gaurdamos el tiempo en segundo
-    private float currentTime = 0f;
-
+    private float timer = 0f;
 
     private void Awake()
     {
@@ -28,14 +27,13 @@ public class AutoSaveController : MonoBehaviour
     {
         //cuando llega el tiempo a 0 se activa el metodo de autosave
         //y guarda partida de forma automatica
-            currentTime += Time.deltaTime;
+            timer += Time.deltaTime;
 
-            if (currentTime >= timeToSave)
+            if (timer >= timeToSave)
             {
                 AutoSave();
-            currentTime = 0f;
+                RestoreAutoSaveTimer();
             }
-        
     }
 
     public void AutoSave()
@@ -44,4 +42,8 @@ public class AutoSaveController : MonoBehaviour
         Debug.Log("Se ha autoguardado!");
     }
 
+    public void RestoreAutoSaveTimer()
+    {
+        timer = 0;
+    }
 }
