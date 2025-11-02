@@ -21,6 +21,7 @@ public class CoinController : MonoBehaviour, ISaveable
     {
         CoinData dt = (CoinData) data;
         gameObject.SetActive(dt.enable);
+        value = dt.value;
         transform.position = new Vector3(dt.pos[0], dt.pos[1], dt.pos[2]);
         //importante devolver enable a la variable, sino al guardar dos veces se quedara con el enable anterior y puede desaparecer de la nada
         isEnabled = dt.enable;
