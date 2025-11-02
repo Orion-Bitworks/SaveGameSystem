@@ -1634,6 +1634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obtainedCoins: 0
+  killedEnemies: 0
 --- !u!4 &1488011033
 Transform:
   m_ObjectHideFlags: 0
