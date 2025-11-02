@@ -32,7 +32,7 @@ public class SaveSystemController : MonoBehaviour
         if (!Directory.Exists(saveFolder))
             Directory.CreateDirectory(saveFolder);
         //guardamos los datos que hay en la clase SaveData
-        SaveData saveData = new SaveData();
+        TempData tempData = new TempData();
         //hacemos una lista de los ISaveable que tenemos 
         ISaveable[] saveables = FindObjectsOfType<MonoBehaviour>(true) as ISaveable[];
 
@@ -43,14 +43,14 @@ public class SaveSystemController : MonoBehaviour
             {
                 string id = saveable.GetUniqueID();
                 object data = saveable.CaptureData();
-                saveData.allData[id] = data;
+                tempData.allData[id] = data;
             }
         }
         //lo pasamos a binario
         BinaryFormatter formatter = new BinaryFormatter();
         using (FileStream stream = new FileStream(saveFile, FileMode.Create))
         {
-            formatter.Serialize(stream, saveData);
+            formatter.Serialize(stream, tempData);
         }
 
         Debug.Log($"✅ Juego guardado en: {saveFile}");
@@ -66,11 +66,11 @@ public class SaveSystemController : MonoBehaviour
         }
 
         BinaryFormatter formatter = new BinaryFormatter();
-        SaveData saveData;
+        TempData tempData;
 
         using (FileStream stream = new FileStream(saveFile, FileMode.Open))
         {
-            saveData = formatter.Deserialize(stream) as SaveData;
+            tempData = formatter.Deserialize(stream) as TempData;
         }
         //
         foreach (MonoBehaviour mono in FindObjectsOfType<MonoBehaviour>(true))
@@ -78,53 +78,13 @@ public class SaveSystemController : MonoBehaviour
             if (mono is ISaveable saveable)
             {
                 string id = saveable.GetUniqueID();
-                if (saveData.allData.ContainsKey(id))
+                if (tempData.allData.ContainsKey(id))
                 {
-                    saveable.RestoreData(saveData.allData[id]);
+                    saveable.RestoreData(tempData.allData[id]);
                 }
             }
         }
 
         Debug.Log("✅ Juego cargado correctamente");
     }
-
-
-    public static void SaveEnemy(Enemies enemies)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = (Application.persistentDataPath + "/Saves");
-        string binaryPath = (Application.persistentDataPath + "/Saves/SaveDataEnemy.dat");
-
-        if (!Directory.Exists(path))
-        {
-            Directory.CreateDirectory(path);
-        }
-        else Debug.Log("La carpeta de los enemigos ya existe!");
-
-        FileStream stream = new FileStream(binaryPath, FileMode.Create);
-        EnemyData data = new EnemyData(enemies);
-
-        formatter.Serialize(stream, data);
-        stream.Close();
-    }
-
-    public static EnemyData LoadEnemy()
-    {
-        string binaryPath = (Application.persistentDataPath + "/Saves/SaveDataEnemy.dat");
-
-        if (File.Exists(binaryPath))
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(binaryPath, FileMode.Open);
-            EnemyData data = formatter.Deserialize(stream) as EnemyData;
-            stream.Close();
-            return data;
-        }
-        else
-        {
-            Debug.LogError("Save file not found at " + binaryPath);
-            return null;
-        }
-    }
-
 }

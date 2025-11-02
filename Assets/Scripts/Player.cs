@@ -19,7 +19,7 @@ public class Player : MonoBehaviour, ISaveable
     {
         PlayerData d = (PlayerData)data;
         health = d.health;
-        transform.position = new Vector3(d.pos[0], d.pos[1], d.pos[2]);
+        transform.position = d.GetPos();
     }
 
     public int GetHealth()

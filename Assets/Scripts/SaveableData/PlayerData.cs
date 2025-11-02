@@ -4,14 +4,14 @@ using UnityEngine;
 
 //guardamos los datos de player para luego poder pasarlos a binario
 [System.Serializable]
-public class PlayerData
+public class PlayerData : SaveData
 {
     public int health;
-    public float[] pos;
+    //public float[] pos;
 
     public PlayerData(Player player)
     {
         health = player.GetHealth();
-        pos = new float[] { player.transform.position.x, player.transform.position.y, player.transform.position.z };
+        SetPos(player.transform.position);
     }
 }
