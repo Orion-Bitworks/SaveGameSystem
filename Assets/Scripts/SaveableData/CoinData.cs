@@ -3,23 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-
-public class CoinData
+public class CoinData : SaveData
 {
-    public bool enable;
-    public int value;
-    public float movementQuantity;
-    public float movementSpeed;
-    public float[] pos;
-    public float[] posIni;
+    private int value;
+    private float floatDistance;
+    private float floatSpeed;
 
     public CoinData(CoinController coin)
     {
-        value = coin.GetValue();
-        movementQuantity = coin.GetMovementQuantity();
-        movementSpeed = coin.GetMovementSpeed();
-        enable = coin.IsEnabled();
-        pos = new float[] { coin.transform.position.x, coin.transform.position.y, coin.transform.position.z };
-        posIni = new float[] { coin.GetPosIni().x, coin.GetPosIni().y, coin.GetPosIni().z };
+        SetEnabled(coin.IsEnabled());
+        SetPos(coin.transform.position);
+        SetValue(coin.GetValue());
+        SetFloatDistance(coin.GetFloatDistance());
+        SetFloatSpeed(coin.GetFloatSpeed());
+    }
+
+    public void SetValue(int value)
+    {
+        this.value = value;
+    }
+
+    public int GetValue()
+    {
+        return value;
+    }
+
+    public void SetFloatDistance(float floatDistance)
+    {
+        this.floatDistance = floatDistance;
+    }
+
+    public float GetFloatDistance()
+    {
+        return floatDistance;
+    }
+
+    public void SetFloatSpeed(float floatSpeed)
+    {
+        this.floatSpeed = floatSpeed;
+    }
+
+    public float GetFloatSpeed()
+    {
+        return floatSpeed;
     }
 }

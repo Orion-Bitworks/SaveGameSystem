@@ -6,8 +6,8 @@ using UnityEngine;
 public class CoinController : MonoBehaviour, ISaveable
 {
     [SerializeField] int value = 1;
-    [SerializeField] float movementQuantity = 0.2f;
-    [SerializeField] float movementSpeed = 1.5f;
+    [SerializeField] float floatDistance = 0.2f;
+    [SerializeField] float floatSpeed = 1.5f;
     [SerializeField] private string id;
     private bool isEnabled = true;
     private CoinData data;
@@ -22,15 +22,14 @@ public class CoinController : MonoBehaviour, ISaveable
 
     public void RestoreData(object data)
     {
-        CoinData dt = (CoinData) data;
-        gameObject.SetActive(dt.enable);
-        value = dt.value;
-        movementQuantity = dt.movementQuantity;
-        movementSpeed = dt.movementSpeed;
-        transform.position = new Vector3(dt.pos[0], dt.pos[1], dt.pos[2]);
-        posIni = new Vector3(dt.posIni[0], dt.posIni[1], dt.posIni[2]);
+        CoinData d = (CoinData) data;
+        gameObject.SetActive(d.GetEnabled());
+        value = d.GetValue();
+        floatDistance = d.GetFloatDistance();
+        floatSpeed = d.GetFloatSpeed();
+        transform.position = d.GetPos();
         //importante devolver enable a la variable, sino al guardar dos veces se quedara con el enable anterior y puede desaparecer de la nada
-        isEnabled = dt.enable;
+        isEnabled = d.GetEnabled();
     }
 
     private void Start()
@@ -41,9 +40,7 @@ public class CoinController : MonoBehaviour, ISaveable
 
     private void Update()
     {
-        FloatingMovement();
-
-        float newY = posIni.y + Mathf.Sin(Time.time * movementSpeed) * movementQuantity;
+        float newY = posIni.y + Mathf.Sin(Time.time * floatSpeed) * floatDistance;
         transform.position = new Vector3(posIni.x, newY, posIni.z);
     }
 
@@ -57,24 +54,24 @@ public class CoinController : MonoBehaviour, ISaveable
         value = newValue;
     }
 
-    public float GetMovementQuantity()
+    public float GetFloatDistance()
     {
-        return movementQuantity;
+        return floatDistance;
     }
 
-    public void SetMovementQuantity(float newMovementQuantity)
+    public void SetFloatDistance(float newFloatDistance)
     {
-        movementQuantity = newMovementQuantity;
+        floatDistance = newFloatDistance;
     }
 
-    public float GetMovementSpeed()
+    public float GetFloatSpeed()
     {
-        return movementSpeed;
+        return floatSpeed;
     }
 
-    public void SetMovementSpeed(float newMovementSpeed)
+    public void SetMovementSpeed(float newFloatSpeed)
     {
-        movementSpeed = newMovementSpeed;
+        floatSpeed = newFloatSpeed;
     }
 
     public Vector3 GetPosIni()
@@ -110,10 +107,5 @@ public class CoinController : MonoBehaviour, ISaveable
         GameManager.instance.AddObtainedCoins(value);
         isEnabled = false;
         gameObject.SetActive(isEnabled);
-    }
-
-    public void FloatingMovement()
-    {
-        
     }
 }
