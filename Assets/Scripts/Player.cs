@@ -18,7 +18,7 @@ public class Player : MonoBehaviour, ISaveable
     public void RestoreData(object data)
     {
         PlayerData d = (PlayerData)data;
-        health = d.health;
+        health = d.GetHealth();
         transform.position = d.GetPos();
     }
 
