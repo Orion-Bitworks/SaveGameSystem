@@ -6,20 +6,10 @@ using UnityEngine;
 public class SceneObject : MonoBehaviour, ISaveable
 {
     //!!! hay que añadir una variable para ver si se esta moviendo o no a la hora de guardar!!!!
-    bool enable = true;
+    bool isEnabled = true;
     [SerializeField] private string id = System.Guid.NewGuid().ToString();
     ObjectData data;
- 
-    //metodo para el bloque en caso de que lo necistemos
-   /* private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            enable = false;
-            gameObject.SetActive(enable);
-            
-        }
-    }*/
+
     //le damos una id unica para que cada objeto sea diferente   
     public string GetUniqueID() => id;
     //guardamos las variables de SceneObject, en este caso la posicion o si esta enable
@@ -31,16 +21,16 @@ public class SceneObject : MonoBehaviour, ISaveable
     public void RestoreData(object data)
     {
         ObjectData d = (ObjectData)data;
-        gameObject.SetActive(d.enable);
-        transform.position = new Vector3(d.pos[0], d.pos[1], d.pos[2]);
+        gameObject.SetActive(d.GetEnabled());
+        transform.position = d.GetPos();
         //importante devolver enable a la variable, sino al guardar dos veces se quedara con el enable anterior y puede desaparecer de la nada
-        enable = d.enable;
+        isEnabled = d.GetEnabled();
     }
 
-    public bool IsEnable()
+    public bool IsEnabled()
     {
 
-        return enable;
+        return isEnabled;
     }
     public void SetTransform(Vector3 pos)
     {

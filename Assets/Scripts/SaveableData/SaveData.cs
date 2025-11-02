@@ -5,12 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    private bool enable;
+    private bool isEnabled;
     private float[] pos;
 
-    public void SetEnabled(bool enable)
+    public void SetEnabled(bool isEnabled)
     {
-        this.enable = enable;
+        this.isEnabled = isEnabled;
+    }
+
+    public bool GetEnabled()
+    {
+        return isEnabled;
     }
 
     public void SetPos(Vector3 position)

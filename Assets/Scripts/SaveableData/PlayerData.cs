@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerData : SaveData
 {
     public int health;
-    //public float[] pos;
 
     public PlayerData(Player player)
     {
