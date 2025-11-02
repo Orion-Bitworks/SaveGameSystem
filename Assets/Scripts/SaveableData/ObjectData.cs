@@ -10,7 +10,7 @@ public class ObjectData : SaveData
 
     public ObjectData(SceneObject saveObject)
     {
-        SetEnabled(saveObject.IsEnabled());
+        SetEnabled(saveObject.gameObject.activeSelf);
         SetPos(saveObject.transform.position);
         SetMovement(saveObject.GetMovement());
         SetRotationSpeed(saveObject.GetRotationSpeed());

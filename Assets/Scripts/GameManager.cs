@@ -2,23 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour, ISaveable
+public class GameManager : SaveableObject
 {
     public static GameManager instance;
-    private string id = "GameManager";
-    GameManagerData data;
 
     [SerializeField] int obtainedCoins;
     [SerializeField] int killedEnemies;
 
-    public string GetUniqueID() => id;
-
-    public object CaptureData()
+    public override object CaptureData()
     {
         return data = new GameManagerData(this);
     }
 
-    public void RestoreData(object data)
+    public override void RestoreData(object data)
     {
         GameManagerData d = (GameManagerData) data;
         obtainedCoins = d.GetObtainedCoins();

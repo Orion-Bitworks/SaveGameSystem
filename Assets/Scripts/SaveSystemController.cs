@@ -12,8 +12,6 @@ public class SaveSystemController : MonoBehaviour
     private static string saveFolder => Application.persistentDataPath + "/Saves";
     private static string saveFile => saveFolder + "/SaveData.dat";
 
-
-
     private void Awake()
     {
         if (instance != null && instance != this)

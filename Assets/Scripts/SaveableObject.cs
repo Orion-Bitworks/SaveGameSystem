@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class SaveableObject : MonoBehaviour, ISaveable
 {
     [SerializeField] private string id = System.Guid.NewGuid().ToString();
+    protected SaveData data; 
 
     public virtual string GetUniqueID() => id;
 

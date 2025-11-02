@@ -8,7 +8,7 @@ public class EnemyData : CharacterData
     {
         SetHealth(enemy.GetHealth());
         SetPos(enemy.transform.position);
-        SetEnabled(enemy.isAlive);
+        SetEnabled(enemy.gameObject.activeSelf);
         SetVelocityX(enemy.velocityX);
         SetVelocityZ(enemy.velocityZ);
     }

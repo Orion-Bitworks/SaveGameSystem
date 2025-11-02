@@ -7,7 +7,7 @@ public class CoinData : SaveData
 
     public CoinData(CoinController coin)
     {
-        SetEnabled(coin.IsEnabled());
+        SetEnabled(coin.gameObject.activeSelf);
         SetPos(coin.transform.position);
         SetValue(coin.GetValue());
         SetFloatDistance(coin.GetFloatDistance());

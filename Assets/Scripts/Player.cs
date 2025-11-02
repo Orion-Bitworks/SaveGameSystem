@@ -5,8 +5,6 @@ using UnityEngine;
 public class Player : SaveableObject
 {
     [SerializeField] int health = 3;
-    PlayerData data;
-    public override string GetUniqueID() => GetId();
 
     //guardamos los datos de Player 
     public override object CaptureData()
@@ -17,7 +15,7 @@ public class Player : SaveableObject
     //cargamos los datos que previamente hemos guardado de player data
     public override void RestoreData(object data)
     {
-        PlayerData d = (PlayerData)data;
+        PlayerData d = (PlayerData) data;
         health = d.GetHealth();
         transform.position = d.GetPos();
     }

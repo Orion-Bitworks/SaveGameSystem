@@ -3,37 +3,28 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemies : MonoBehaviour, ISaveable
+public class Enemies : SaveableObject
 {
-
-    public int lives;
+    public int health;
     public bool isAlive = true;
 
     public float velocityX, velocityZ; //recordar que en unity els eixos son diferents (x, y) NO, (x, z) SI
-
-    //private int enemiesDied; //Contabilitar quans enemics s'han matat
-
-    [SerializeField] private string id = System.Guid.NewGuid().ToString();
-
-    EnemyData data;
-
-    public string GetUniqueID() => id;
 
     private void Update()
     {
         MoveEnemy();
     }
 
-    public object CaptureData()
+    public override object CaptureData()
     {
         return data = new EnemyData(this);
     }
 
-    public void RestoreData(object data)
+    public override void RestoreData(object data)
     {
         EnemyData d = (EnemyData)data;
         gameObject.SetActive(d.GetEnabled());
-        lives = d.GetHealth();
+        health = d.GetHealth();
         transform.position = d.GetPos();
         
         velocityX = d.GetVelocityX();
@@ -43,34 +34,10 @@ public class Enemies : MonoBehaviour, ISaveable
 
     }
 
-    /*public void SaveEnemy() //guardar el enemic
-    {
-        SaveSystemController.SaveEnemy(this);
-    }*/
-
     public int GetHealth() //retornem la vida
     {
-        return lives;
+        return health;
     }
-
-    /*public void LoadEnemy() //carregar el enemic
-    {
-        EnemyData data = SaveSystemController.LoadEnemy();
-            
-
-        lives = data.health;
-        Vector3 pos;
-
-        pos.x = data.enemyPosition[0];
-        pos.y = data.enemyPosition[1];
-        pos.z = data.enemyPosition[2];
-
-        SetPosition(pos);
-
-        velocityX = data.velocityX;
-        velocityZ = data.velocityZ;
-    }*/
-
 
     public void SetPosition(Vector3 pos) //Setejar la posicio del enemic
     {
@@ -82,17 +49,15 @@ public class Enemies : MonoBehaviour, ISaveable
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            lives--; //li restem una vida
+            health--; //li restem una vida
 
             isAlive = false; //no esta viu
-
-            //enemiesDied++; // sumem a 1 els enemics morts
 
             GameManager.instance.AddKilledEnemy();
 
             gameObject.SetActive(isAlive); //destrueix el gameObject
 
-            Debug.Log("Vidas restantes:" + lives + "\n ENEMIGO DESTRUIDO");
+            Debug.Log("Vidas restantes:" + health + "\n ENEMIGO DESTRUIDO");
 
         }
         

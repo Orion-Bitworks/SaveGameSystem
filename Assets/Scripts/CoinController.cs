@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CoinController : MonoBehaviour, ISaveable
+public class CoinController : SaveableObject
 {
     [SerializeField] int value = 1;
     [SerializeField] float floatDistance = 0.2f;
     [SerializeField] float floatSpeed = 1.5f;
-    [SerializeField] private string id;
-    private bool isEnabled = true;
-    private CoinData data;
+    //private bool isEnabled = true;
     private Vector3 posIni;
 
-    public string GetUniqueID() => id;
-
-    public object CaptureData()
+    public override object CaptureData()
     {
         return data = new CoinData(this);
     }
 
-    public void RestoreData(object data)
+    public override void RestoreData(object data)
     {
         CoinData d = (CoinData) data;
         gameObject.SetActive(d.GetEnabled());
@@ -28,13 +24,10 @@ public class CoinController : MonoBehaviour, ISaveable
         floatDistance = d.GetFloatDistance();
         floatSpeed = d.GetFloatSpeed();
         transform.position = d.GetPos();
-        //importante devolver enable a la variable, sino al guardar dos veces se quedara con el enable anterior y puede desaparecer de la nada
-        isEnabled = d.GetEnabled();
     }
 
     private void Start()
     {
-        id = System.Guid.NewGuid().ToString();
         posIni = transform.position;
     }
 
@@ -84,16 +77,6 @@ public class CoinController : MonoBehaviour, ISaveable
         posIni = newPosIni;
     }
 
-    public bool IsEnabled()
-    {
-        return isEnabled;
-    }
-
-    public void SetEnabled(bool isActive)
-    {
-        this.isEnabled = isActive;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -105,7 +88,6 @@ public class CoinController : MonoBehaviour, ISaveable
     public void PickUp(Collider player)
     {
         GameManager.instance.AddObtainedCoins(value);
-        isEnabled = false;
-        gameObject.SetActive(isEnabled);
+        gameObject.SetActive(false);
     }
 }
