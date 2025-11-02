@@ -6,7 +6,7 @@ using UnityEngine;
 public class CoinController : MonoBehaviour, ISaveable
 {
     [SerializeField] int value = 1;
-    private string id = "coin";
+    [SerializeField] private string id;
     private bool isEnabled = true;
     private CoinData data;
 
@@ -24,6 +24,11 @@ public class CoinController : MonoBehaviour, ISaveable
         transform.position = new Vector3(dt.pos[0], dt.pos[1], dt.pos[2]);
         //importante devolver enable a la variable, sino al guardar dos veces se quedara con el enable anterior y puede desaparecer de la nada
         isEnabled = dt.enable;
+    }
+
+    private void Start()
+    {
+        id = System.Guid.NewGuid().ToString();
     }
 
     public int GetValue()
