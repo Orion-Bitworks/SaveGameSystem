@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//creamos una interface
+//Creamos una interface para objetos que se pueden guardar
 public interface ISaveable
 {
     string GetUniqueID();

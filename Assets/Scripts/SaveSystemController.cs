@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class SaveSystemController : MonoBehaviour
 {
-
     public static SaveSystemController instance;
     private static string saveFolder => Application.persistentDataPath + "/Saves";
     private static string saveFile => saveFolder + "/SaveData.dat";
@@ -28,13 +27,17 @@ public class SaveSystemController : MonoBehaviour
     public static void SaveGame()
     {
         if (!Directory.Exists(saveFolder))
+        {
             Directory.CreateDirectory(saveFolder);
-        //guardamos los datos que hay en la clase SaveData
+        }
+
+        //Guardamos los datos que hay en la clase SaveData
         TempData tempData = new TempData();
-        //hacemos una lista de los ISaveable que tenemos 
+
+        //Hacemos una lista de los ISaveable que tenemos 
         ISaveable[] saveables = FindObjectsOfType<MonoBehaviour>(true) as ISaveable[];
 
-        // verificamos si los MonoBEhaviours son isaveables y en ese caso guardamos la informacion
+        //Verificamos si los MonoBehaviours son isaveables y en ese caso guardamos la informacion
         foreach (MonoBehaviour mono in FindObjectsOfType<MonoBehaviour>(true))
         {
             if (mono is ISaveable saveable)
@@ -44,7 +47,8 @@ public class SaveSystemController : MonoBehaviour
                 tempData.allData[id] = data;
             }
         }
-        //lo pasamos a binario
+
+        //Lo pasamos a binario
         BinaryFormatter formatter = new BinaryFormatter();
         using (FileStream stream = new FileStream(saveFile, FileMode.Create))
         {
@@ -71,7 +75,8 @@ public class SaveSystemController : MonoBehaviour
         {
             tempData = formatter.Deserialize(stream) as TempData;
         }
-        //
+
+        //Verificamos si los MonoBehaviours son isaveables y en ese caso cargamos la informacion
         foreach (MonoBehaviour mono in FindObjectsOfType<MonoBehaviour>(true))
         {
             if (mono is ISaveable saveable)

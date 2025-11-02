@@ -4,13 +4,13 @@ public class EnemyData : CharacterData
     private float velocityX;
     private float velocityZ;
 
-    public EnemyData(Enemies enemy) //setejem cada variable amb lo que es
+    public EnemyData(EnemyController enemy)
     {
         SetHealth(enemy.GetHealth());
         SetPos(enemy.transform.position);
         SetEnabled(enemy.gameObject.activeSelf);
-        SetVelocityX(enemy.velocityX);
-        SetVelocityZ(enemy.velocityZ);
+        SetVelocityX(enemy.GetVelocityX());
+        SetVelocityZ(enemy.GetVelocityZ());
     }
 
     public void SetVelocityX(float velocityX)

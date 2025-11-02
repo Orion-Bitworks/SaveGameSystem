@@ -1,6 +1,6 @@
 using UnityEngine;
 
-//guardamos todas las variables que nos interesan gaurdar de SceneObject en este caso
+//Guardamos todas las variables que nos interesan gaurdar de SceneObject en este caso
 [System.Serializable]
 public class ObjectData : SaveData
 {

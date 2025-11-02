@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemies : SaveableObject
+public class EnemyController : SaveableObject
 {
-    public int health;
-    public bool isAlive = true;
-    public float velocityX, velocityZ; //recordar que en unity els eixos son diferents (x, y) NO, (x, z) SI
+    private int health;
+    private bool isAlive = true;
+    [SerializeField] float velocityX, velocityZ; //Recordar que en unity els eixos son diferents (x, y) NO, (x, z) SI
+    private int moveCheck = 9;
 
     private void Update()
     {
@@ -25,15 +26,13 @@ public class Enemies : SaveableObject
         gameObject.SetActive(d.GetEnabled());
         health = d.GetHealth();
         transform.position = d.GetPos();
-        
         velocityX = d.GetVelocityX();
         velocityZ = d.GetVelocityZ();
-
         isAlive = d.GetEnabled();
 
     }
 
-    public int GetHealth() //retornem la vida
+    public int GetHealth() //Retornem la vida
     {
         return health;
     }
@@ -43,39 +42,43 @@ public class Enemies : SaveableObject
         gameObject.transform.position = pos;
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            health--; //li restem una vida
+            health--; //Li restem una vida
 
-            isAlive = false; //no esta viu
-
-            GameManager.instance.AddKilledEnemy();
-
-            gameObject.SetActive(isAlive); //destrueix el gameObject
-
-            Debug.Log("Vidas restantes:" + health + "\n ENEMIGO DESTRUIDO");
-
+            if (health <= 0)
+            {
+                isAlive = false;
+                GameManager.instance.AddKilledEnemy();
+                gameObject.SetActive(isAlive); //Desactiva el gameObject
+            }
         }
-        
     }
     
-    void MoveEnemy() //mètode per moure els enemics de manera random
+    void MoveEnemy() //Mètode per moure els enemics de manera random
     {
         transform.Translate (velocityX * Time.deltaTime, 0 , velocityZ * Time.deltaTime);
 
-        if((transform.position.x < -9) || (transform.position.x > 9))
+        if((transform.position.x < -moveCheck) || (transform.position.x > moveCheck))
         {
             velocityX = -velocityX;
         }
 
-        if ((transform.position.z < -9) || (transform.position.z > 9))
+        if ((transform.position.z < -moveCheck) || (transform.position.z > moveCheck))
         {
             velocityZ = -velocityZ;
         }
+    }
 
+    public float GetVelocityX()
+    {
+        return velocityX;
+    }
 
+    public float GetVelocityZ()
+    {
+        return velocityZ;
     }
 }

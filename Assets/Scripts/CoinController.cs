@@ -8,7 +8,6 @@ public class CoinController : SaveableObject
     [SerializeField] int value = 1;
     [SerializeField] float floatDistance = 0.2f;
     [SerializeField] float floatSpeed = 1.5f;
-    //private bool isEnabled = true;
     private Vector3 posIni;
 
     public override object CaptureData()

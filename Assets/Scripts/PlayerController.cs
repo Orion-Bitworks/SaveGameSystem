@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : SaveableObject
+public class PlayerController : SaveableObject
 {
     [SerializeField] int health = 3;
 
-    //guardamos los datos de Player 
+    //Guardamos los datos de Player 
     public override object CaptureData()
     {
        return data = new PlayerData(this);
     }
 
-    //cargamos los datos que previamente hemos guardado de player data
+    //Cargamos los datos que previamente hemos guardado de player data
     public override void RestoreData(object data)
     {
         PlayerData d = (PlayerData) data;

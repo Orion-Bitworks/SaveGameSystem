@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class SceneObject : SaveableObject
 {
-    Rigidbody rb;
+    private Rigidbody rb;
 
-    //guardamos las variables de SceneObject, en este caso la posicion o si esta enable
+    //Guardamos las variables de SceneObject, en este caso la posicion o si esta enable
     public override object CaptureData()
     {
         return data = new ObjectData(this);
     }
-    //le devolmemos los datos anteriormente guardados
+    //Le devolmemos los datos anteriormente guardados
     public override void RestoreData(object data)
     {
         ObjectData d = (ObjectData)data;
