@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovementController : MonoBehaviour
 {
@@ -10,11 +11,17 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField][Range(1f, 2f)] float sprintMultiplier;
     [SerializeField] float rotationSpeed;
     [SerializeField] AnimationCurve accelerationCurve;
+    [SerializeField] float jumpForce = 14f;
 
     private bool isMoving;
     Rigidbody rb;
     Vector3 movementDirection;
 
+    [SerializeField] Transform groundCheck;
+    [SerializeField] float groundCheckRadius = 0.2f;
+    [SerializeField] LayerMask groundLayer;
+
+    private bool isGrounded;
     float horizontalXMovement, horizontalZMovement;
     float timer = 0;
     
@@ -27,10 +34,15 @@ public class PlayerMovementController : MonoBehaviour
     {
         inputManager = InputManager.instance;
     }
+    private void Update()
+    {
+        isGrounded = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayer).Length > 0;
+    }
 
     void FixedUpdate()
     {
         OnMovement();
+        OnJump();
     }
 
     void OnMovement()
@@ -66,6 +78,13 @@ public class PlayerMovementController : MonoBehaviour
         if (inputManager.sprint_ia.IsPressed())
         {
             rb.velocity *= sprintMultiplier;
+        }
+    }
+
+    void OnJump()
+    {
+        if (inputManager.jump_ia.IsPressed() && isGrounded) {
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce);
         }
     }
 }

@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     public InputAction horizontalX_ia;
     public InputAction horizontalZ_ia;
     public InputAction sprint_ia;
+    public InputAction jump_ia;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class InputManager : MonoBehaviour
         horizontalX_ia = map.FindActionMap("Movement").FindAction("HorizontalX");
         horizontalZ_ia = map.FindActionMap("Movement").FindAction("HorizontalZ");
         sprint_ia = map.FindActionMap("Movement").FindAction("Sprint");
+        jump_ia = map.FindActionMap("Movement").FindAction("Jump");
     }
 
     public void EnableInput()
