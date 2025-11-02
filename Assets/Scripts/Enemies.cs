@@ -32,14 +32,14 @@ public class Enemies : MonoBehaviour, ISaveable
     public void RestoreData(object data)
     {
         EnemyData d = (EnemyData)data;
-        gameObject.SetActive(d.isAlive);
-        lives = d.health;
-        transform.position = new Vector3(d.enemyPosition[0], d.enemyPosition[1], d.enemyPosition[2]);
+        gameObject.SetActive(d.GetEnabled());
+        lives = d.GetHealth();
+        transform.position = d.GetPos();
         
-        velocityX = d.velocityX;
-        velocityZ = d.velocityZ;
+        velocityX = d.GetVelocityX();
+        velocityZ = d.GetVelocityZ();
 
-        isAlive = d.isAlive;
+        isAlive = d.GetEnabled();
 
     }
 

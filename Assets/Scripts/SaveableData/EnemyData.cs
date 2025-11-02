@@ -3,23 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class EnemyData
+public class EnemyData : CharacterData
 {
-    public int health;
-    public float[] enemyPosition;
-    public float velocityX;
-    public float velocityZ;
-    public bool isAlive;
+    private float velocityX;
+    private float velocityZ;
 
-    public EnemyData(Enemies enemies) //setejem cada variable amb lo que es
+    public EnemyData(Enemies enemy) //setejem cada variable amb lo que es
     {
-        health = enemies.GetHealth();
-        enemyPosition = new float[] { enemies.transform.position.x, enemies.transform.position.y, enemies.transform.position.z };
-
-        velocityX = enemies.velocityX;
-        velocityZ = enemies.velocityZ;
-
-        isAlive = enemies.isAlive;
+        SetHealth(enemy.GetHealth());
+        SetPos(enemy.transform.position);
+        SetEnabled(enemy.isAlive);
+        SetVelocityX(enemy.velocityX);
+        SetVelocityZ(enemy.velocityZ);
     }
 
+    public void SetVelocityX(float velocityX)
+    {
+        this.velocityX = velocityX;
+    }
+
+    public float GetVelocityX()
+    {
+        return velocityX;
+    }
+
+    public void SetVelocityZ(float velocityZ)
+    {
+        this.velocityZ = velocityZ;
+    }
+
+    public float GetVelocityZ()
+    {
+        return velocityZ;
+    }
 }
