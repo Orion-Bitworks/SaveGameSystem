@@ -119,4 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  movementQuantity: 0.2
+  movementSpeed: 1.5
   id: 
