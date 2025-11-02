@@ -1501,7 +1501,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 481779028}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Enemies, Assembly-CSharp
         m_MethodName: SaveEnemy
         m_Mode: 1
@@ -2213,7 +2213,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 481779028}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Enemies, Assembly-CSharp
         m_MethodName: LoadEnemy
         m_Mode: 1
@@ -2471,7 +2471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9092725509473075676, guid: dad6d1cb3679fd74cbc2da1bb2ef155b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.87
+      value: -8.13
       objectReference: {fileID: 0}
     - target: {fileID: 9092725509473075676, guid: dad6d1cb3679fd74cbc2da1bb2ef155b, type: 3}
       propertyPath: m_LocalRotation.w
